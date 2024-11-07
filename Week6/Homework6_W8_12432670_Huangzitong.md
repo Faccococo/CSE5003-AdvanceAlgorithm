@@ -12,7 +12,7 @@ layout: cover
 
 # Task 6-1
 
-<img src="./img/image.png">
+<img src="./img/image.png" width="80%">
 
 ---
 layout: two-cols
