@@ -154,47 +154,20 @@ The method relies on **NSGA-II**, a genetic algorithm that uses a population of 
    - The fitness of each solution is evaluated using the makespan and manufacturing costs, with a fast non-dominated sorting approach used to rank solutions.
 
 ---
-layout: two-cols
----
 
-## Application: Machining Job Shop for Large-size Valve
+## Application: Machining Job Shop for Large-size Valve in Yuanda Valve Company
 
-**Population Initialization**
-- The initial population is generated randomly.
-- Each chromosome represents a unique process plan and schedule.
-
-**Crossover**
-- Combines two parent solutions to generate offspring.
-- **Partially Mapped Crossover (PMX)** is used for the operation sequence (OS).
-- Machine assignments (MA) are adjusted to maintain feasibility.
-
-::right::
-
-**Mutation**
-Three types of mutations are applied to introduce diversity and explore the solution space:
-1. **Half Random Mutation (OS)**:
-   - Selects a random operation and repositions it within its permissible range.
-2. **Full Random Mutation (OS)**:
-   - Replaces an operation with an alternative one.
-3. **Full Random Mutation (MA)**:
-   - Reassigns a machine for a randomly selected operation.
-
----
-
-## Application: Machining Job Shop for Large-size Valve Contd.
-
-**Elite Strategy**
-
-The NSGA-II includes mechanisms to enhance solution quality and diversity:
-
-**Dynamic Population Update**
-- Removes duplicate solutions in each generation.
-- Adds randomly generated new solutions to maintain population diversity.
-
-**Adaptive Mutation**
-- Adjusts mutation probability based on the **entropy change rate ($\Delta e$)** of the population:
-  $$
-  \text{If } \Delta e \geq \mu, \text{ continue as normal. Otherwise, increase mutation probability.}
-  $$
-  This helps escape local optima and explore new regions of the solution space.
-
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+>Wang J, Xu L, Sun S, Ma Y, Yu G (2024) Multi-objective optimization using improved NSGA-II for integrated process planning and scheduling problems in a machining job shop for large-size valve. PLoS ONE 19(6): e0306024. https://doi.org/10.1371/journal.pone.0306024
