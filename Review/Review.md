@@ -53,7 +53,7 @@ visiting all cities and returning to the start city
 
 从$n$条边中进行依次反转操作可能产生$\frac{n(n-1)}{2}$个解。
 
-![image-20250102012704365](/home/huangzitong/.config/Typora/typora-user-images/image-20250102012704365.png)
+![image-20250102012704365](./imgs/image-20250102012704365.png)
 
 
 
@@ -107,9 +107,9 @@ visiting all cities and returning to the start city
 1. 对中心点位置没有约束
 2. 中心点必须在集合 $S$ 中 
 
-![image-20250102020722160](/home/huangzitong/.config/Typora/typora-user-images/image-20250102020722160.png)
+![image-20250102020722160](./imgs/image-20250102020722160.png)
 
-一个**虚拟的**中心选择算法：
+一个**虚拟的**中心选择算法 (2-approximation)：
 
 - 选择距离最优解的一个中心距离$r^*$范围的一个随机点，删除所有距离为$2r^*$的点
 - 重复上个过程直到没有点 
@@ -135,17 +135,139 @@ visiting all cities and returning to the start city
 
 与Center Selection算法的区别：
 
-<img src="/home/huangzitong/.config/Typora/typora-user-images/image-20250102102550896.png" alt="image-20250102102550896" style="zoom: 20%;" />
+<img src="./imgs/image-20250102102550896.png" alt="image-20250102102550896" style="zoom: 20%;" />
 
 
 
-### K-Means
+### K-Means （not an exact algorithm）
 
 Objective: 最小化每个站点到最近中心的**总平方距离**
 
+Steps:
+
+1. 取当前簇的算术平均值作为簇的中心
+2. 依靠距离簇中心的距离将点划分给簇
+3. 重新计算簇中心
+4. 重复以上过程直到收敛
+
+### k-medoids 
+
+类似K-Means， 但在第一步中在簇中选择一个到所有其他站点的总距离最小的点。
+
+### Fuzzy c-means
 
 
-## Lecture 13: Knapback Problem
+
+## Lecture 8: Set Cover
+
+- Input: $n$ jobs ${s_1, s_2, ..., s_n}$
+- $m$ machines, where
+  - Each machine have a price $w_1, w_2, ..., w_n$
+  - Each machine can handle a subset $S_j$ in the $n$ jobs
+
+Objective: Choise machines to minimize the cost.
+$$
+\text{Minimize }w(C)=\sum_{S_i \in C}\text{ subject to }\bigcup_{S_i \in C} S_i = U
+$$
+
+### Greedy
+
+选择目前完成任务平均cost最小的机器 
+
+例如机器A在目前剩余的四个任务中能够解决三个，cost为6，那平均cost为 $6 / 3 = 2$
+
+
+
+最坏结果：$w\leq H(max_k|S_k|)w^*$ , where $H(n)=\frac{1}{1}+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{n}$
+
+最坏结果出现在每次最优解集都刚好差一点点被选择（如下面的$S_5$）
+
+![image-20250102111444490](./imgs/image-20250102111444490.png)
+
+## Lecture 9: Vertex Cover Problem
+
+- Input: Graph $G$: $G=(V, E)$
+
+  Weight of each vertex (node): $w_i(i\in V)$
+
+- Output: Vertex cover $S$ can cover every edge in $G$ with minimum weight.
+
+Can be modeled with set cover problem.
+
+
+
+### Pricing Method: 2-approximation
+
+设 $p$ 为边 $e$ 愿意支付的覆盖费用。所有与顶点 $v$ 相连的边的价格总和应小于或等于 $w$.
+
+Process: 随机选择一条边，增长该边的价格直到与之相连的一条边tight.
+
+差解出现在权重较大的边被边的价格消耗，从而先于权重较小的边被选择。
+
+<img src="./imgs/image-20250102122531439.png" alt="image-20250102122531439" style="zoom:40%;" />
+
+## Lecture 10&11： Vertex Cover Problem - Use of LP（ 2-approximation）
+
+Vertex Cover 的整数规划(Integer Programming)形式表达：
+$$
+\text{Minimize } w_{IP}(x)=\sum_{i\in V}w_ix_i \\
+\text{Subject to } Ax \geq 1\\
+x\in \{0, 1\}\text{ for }i\in V
+$$
+**Matrix A**: Rows of A correspond to edges in E
+Columns of A correspond to vertexes in V
+
+线性规划：寻找一条线在一个空间中的最值
+
+
+
+Relaxation Problem: 对于一个整数规划问题，其线性规划问题是一个松弛解
+
+整数规划问题的全局最优解不会超过其松弛解，同时也不会差于贪心算法的解
+
+
+
+## Lecture 12: Generalized Load Balancing Problem(Use of LP)
+
+**Input:** Set of $m$ machines: $M = \{\text{Machine 1}, ..., \text{Machine m}\}$
+	Set of $n$ jobs: $J = \{\text{Job 1}, ..., \text{Job n}\}$
+	Processing time of each job: $t_j (j = 1, 2, ..., n)$
+	Subset of M for each job: $M_j (j = 1, 2, ..., n)$
+**Constraint:** Job $j$ should be assigned to a machine in $M_j$
+**Objective:** Minimization of the makespan
+**Output:** Assignment of $n$ jobs to m machines
+
+### 整数规划建模
+
+![image-20250102130804458](./imgs/image-20250102130804458.png)
+
+### 线性规划建模
+
+![image-20250102131232045](./imgs/image-20250102131232045.png)
+
+
+
+### Question: How to obtain a feasible solution from the obtained solution of the relaxation problem?
+
+![image-20250102131115285](./imgs/image-20250102131115285.png)
+
+(1) 每个叶子节点被分配给其父节点。
+
+(2) 每个中间作业节点被分配给一个任意的子节点。
+
+
+
+### Question: How to eliminate cycles from the obtained graph?
+
+<img src="./imgs/image-20250102131808063.png" alt="image-20250102131808063" style="zoom:20%;" />
+
+选择一个循环。沿着循环改变每条边的流量，而不改变每个节点的总输入和每个节点的总输出（即，不改变目标值 L）。
+
+## Lecture 13: Disjoint Paths Problem
+
+Greedy: 选择最短路径（$2\sqrt{m}+1$ approximation）
+
+## Lecture 14: Knapback Problem
 
 ### Greedy Algorithm
 
