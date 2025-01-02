@@ -95,7 +95,7 @@ visiting all cities and returning to the start city
 
 
 
-## Lecture 5: Center Selection Problem
+## Lecture 5&6: Center Selection Problem
 
 - Input: $n$ cities $S={s_1, s_2, ..., s_n}$ 
 - Output: Location of $k$ centers: $C={c_1, c_2, ..., c_k}$
@@ -115,6 +115,35 @@ visiting all cities and returning to the start city
 - 重复上个过程直到没有点 
 
 能够工作的原因：能保证所有的点至少有一个距离为$2r^*$的点在其附近。
+
+
+
+### Greedy inclusion algorithm
+
+在每一步迭代中，选择一个能够最小化**将其添加到中心集合后**每个站点到最近中心的最大距离
+
+每次迭代都至少有两个价值的点，需要从中随机选择一个继续。
+
+
+
+## Lecture 7: Clusting
+
+- Input: $n$ cities $S={s_1, s_2, ..., s_n}$ 
+- Output: Location of $k$ centers: $C={c_1, c_2, ..., c_k}$
+- Objective: Minimize the total square distance from each
+  site to the nearest center. (最小化中心点到城市的最大距离)
+
+与Center Selection算法的区别：
+
+<img src="/home/huangzitong/.config/Typora/typora-user-images/image-20250102102550896.png" alt="image-20250102102550896" style="zoom: 20%;" />
+
+
+
+### K-Means
+
+Objective: 最小化每个站点到最近中心的**总平方距离**
+
+
 
 ## Lecture 13: Knapback Problem
 
